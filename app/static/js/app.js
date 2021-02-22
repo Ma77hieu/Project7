@@ -1,18 +1,17 @@
 $(function () {
 
-    const answer_zone = document.querySelector('#answer');
+    const answer_zone = $('#answer');
 
     class message {
         constructor(author, content) {
             let contentString = (content);
             if (author == 'user') {
-                contentString = "Vous: " + contentString;
-                alert(contentString);
+                this.contentString = "Vous: " + contentString;
             }
             else {
-                messageDisplayed.insertBefore('GrandPyBot: ');
-                messageDisplayed.style.textAlign = "right";
+                this.contentString = "GrandPyBot: " + contentString;
             }
+            // return contentString;
         }
 
     }
@@ -20,8 +19,10 @@ $(function () {
     let button = $('#button');
 
     button.on('click', function () {
-        let messages = new message('user', "ma réponse");
-
-        answer_zone.append(messages);
+        let userInput = $('#userQuestion').val();
+        alert(userInput);
+        let messages = new message('user', userInput);
+        let userMessage = ("<div class='userMessage'>" + messages.contentString + "</div>");
+        answer_zone.append(userMessage);
     })
 })
