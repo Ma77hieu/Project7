@@ -13,12 +13,17 @@ def test32():
     return "Test32563"
 
 
-@app.route('/parser', methods=['GET', 'POST'])
+@app.route('/parser', methods=['POST'])
 def parser():
+    # userInput = textToParse
+    # userInput = request.form["question"]
+    # print(request.form["question"])
     userInput = str(request.form.get('question'))
-    userMessDisplay = "Vous: " + str(request.form.get('question'))
-    apiAnswer = "GrandPyBot: " + userInput
-    return render_template('index.html', parsedTextDisplayed=apiAnswer, userQuestion=userMessDisplay)
+    print(request.form.get('question'))
+    print(userInput)
+    userQuestion = "Vous: " + userInput
+    parsedTextDisplayed = "GrandPyBot: " + userInput
+    return (jsonify(userMessage=userQuestion, apiAnswer=parsedTextDisplayed))
 
 
 if __name__ == "__main__":

@@ -30,7 +30,7 @@ input {
     grid-template-columns:fit-content(90%);
 }
 
-button {
+/* button {
     align-items: center;
     margin:1em;
 	box-shadow: 0px 10px 14px -7px #276873;
@@ -54,7 +54,7 @@ button:hover {
 button:active {
 	position:relative;
 	top:1px;
-}
+} */
 
 #logo{
     max-height: 100px;
@@ -102,6 +102,7 @@ footer > div{
 }
 
 #map{
-	height:400px;
+	height:100px;
+	width:90%;
 }
 

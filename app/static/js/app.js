@@ -1,40 +1,67 @@
-$(function () {
 
-    const answer_zone = $('#answer');
-
-    class message {
-        constructor(author, content) {
-            let contentString = (content);
-            if (author == 'user') {
-                this.contentString = "Vous: " + contentString;
-            }
-            else {
-                parsing(content);
-                this.contentString = "GrandPyBot: " + contentString;
-            }
+class message {
+    constructor(author, content) {
+        let contentString = (content);
+        if (author == 'user') {
+            this.contentString = "Vous: " + contentString;
         }
-
+        else {
+            parsing(content);
+            this.contentString = "GrandPyBot: " + contentString;
+        }
     }
 
-    let button = $('#button');
+}
 
-    button.on('click', function (e) {
-        e.preventDefault();
-        let userInput = $('#userQuestion').val();
-        let messages = new message('user', userInput);
-        let userMessage = ("<div class='userMessage'>" + messages.contentString + "</div>");
-        answer_zone.css('display', 'block')
-        answer_zone.append(userMessage);
-    });
 
+
+$(document).ready(function () {
     let map;
+    const answer_zone = $('#answer');
+    // let button = $('#button');
 
     function initMap() {
         map = new google.maps.Map(document.getElementById("map"), {
             center: { lat: -34.397, lng: 150.644 },
-            zoom: 8,
+            zoom: 8
         });
     }
+
+
+    $('form').on('submit', function (e) {
+        e.preventDefault();
+        // initMap(); //careful with the quota
+        console.log('toto');
+
+        // console.log($('#userQuestion').val());
+        // let textToParse = $('#userQuestion').val();
+
+        // let userInput = $('#user#userQ).val();
+        // let messages = new message('user', userInput);
+
+        $.ajax({
+            url: 'parser',
+            type: "POST",
+            // data: textToParse,
+            success: function () {
+                // let userMessage = ("<div class='userMessage'>" + userQuestion + "</div>");
+                // let apiResponse = ("<div class='apiResponse'>" + parsedTextDisplayed + "</div>");
+                // answer_zone.css('display', 'block')
+                // answer_zone.append(userMessage);
+                // answer_zone.append(apiResponse);
+                console.log
+                console.log('ca marche');
+
+            },
+            error: function () {
+                console.log('oops');
+            }
+        })
+
+    });
+
+
+    // initMap();
 
 
     // function parsing(textToParse) {
