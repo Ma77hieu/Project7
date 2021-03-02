@@ -5,6 +5,11 @@ def parse_exple():
 
 
 def parse(stringToParse):
+    """
+    Locate and extract a location from a text
+    """
+    parsedString = str
+    parsing_done = False
     length = len(stringToParse)
     importantWordBefore = ["adresse de", "se trouve", "se situe" "est situé"]
     importantWordAfter = ["?", ",", "."]
@@ -13,12 +18,29 @@ def parse(stringToParse):
             breakWordLength = len(beforeWord)
             startIndex = stringToParse.find(beforeWord)+breakWordLength
             parsedString = stringToParse[startIndex:length+1]
-    for afterWord in importantWordAfter:
-        if afterWord in parsedString:
-            endIndex = parsedString.find(afterWord)
-            parsedString = parsedString[0:endIndex]
-    print(parsedString)
-    return parsedString
+            for afterWord in importantWordAfter:
+                while parsing_done == False:
+                    if afterWord in parsedString:
+                        endIndex = parsedString.find(afterWord)
+                        parsedString = parsedString[0:endIndex]
+                        parsing_done = True
+            return parsedString
+        else:
+            return "Tu es sûr qu'il y a un lieu dans ta question?"
+
+        print(parsedString)
+
+
+def trim_article_location(location):
+    """
+    Remove article in the location like "la" in "la tour eiffel"
+    """
+    articles = ["la ", "le ", "les ", "l'"]
+    for article in articles:
+        if article in location[:3]:
+            location = location[:3].replace(article, '')+location[3:]
+    print(location)
+    return location
 
 
 if __name__ == "__main__":
@@ -33,3 +55,4 @@ if __name__ == "__main__":
 
     parse(test_se_trouve)
     parse(test_adresse_de)
+    trim_article_location("la tour Eiffel")
