@@ -24,10 +24,18 @@ h1 {
     margin:auto;
 }
 
+form {
+    margin:auto;
+    display: grid;
+    grid-template-columns:fit-content(90%); 
+	justify-content: center;
+}
+
 input {
     margin:auto;
     display: grid;
-    grid-template-columns:fit-content(90%);
+    grid-template-columns:fit-content(90%); 
+	justify-content: center;
 }
 
 /* button {
@@ -88,21 +96,43 @@ footer > div{
 	
 }
 
+#answerZone{
+	display:flex;
+	justify-content: space-between;
+    align-items: center;
+	flex-wrap:wrap;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
 #answer{
-	width:90%;
+	width:45%;
+	min-width: 150px;
+	font-size: 0.8em;
 }
 
 .userMessage{
-	background-color: rgba(73, 73, 73, 0.3);
+	background-color: rgba(73, 73, 73, 0.15);
 	text-align: left;
+	margin: 10px 50px 10px 0px;
+	padding:10px;
+	border-radius:10px;
 }
 
 .apiResponse{
 	text-align: right;
+	margin: 10px 0px 10px 50px;
+	padding:10px;
+	background-color: rgba(75, 247, 152, 0.20);
+	border-radius:10px;
 }
 
 #map{
-	height:100px;
-	width:90%;
+
+	height:300px;
+	width:45%;
+	
 }
+
+
 

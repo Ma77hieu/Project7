@@ -23,17 +23,19 @@
     <div id="mainContent">
         <form action="{{ url_for('parser') }}" method="POST">
             <!-- <div id="userRequest"> -->
-            <input type="text" name="question" required maxlength="255" style="width:90%;height:5em;"
-                placeholder="Dis moi gamin(e), tu avais une question?">
+            <input type="text" name="question" required maxlength="255" style="height:5em;margin: 10px;"
+                placeholder="Dis moi gamin(e),tu avais une question?">
             <!-- </div> -->
             <input type="submit" name="submitButton" value="Dis moi tout!">
             <!-- <input type="submit" name="parseButton" value="TestParser"> -->
         </form>
-        <div id="map">
+        <div id=answerZone>
+            <div id="map">
 
-        </div>
+            </div>
 
-        <div id="answer">
+            <div id="answer">
+            </div>
         </div>
     </div>
 
