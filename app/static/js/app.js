@@ -60,4 +60,5 @@ $(document).ready(function () {
                 console.log('oops');
             }
         })
-    });
+    })
+})
