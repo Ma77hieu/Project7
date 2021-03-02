@@ -3,8 +3,9 @@ import json
 from .inputParser import parse as parse
 from .inputParser import trim_article_location as trim
 from .wikimedia import eliminate_space_char as trimSpace
-from .wikimedia import get_wikimedia_page_title as getSummary
+# from .wikimedia import get_wikimedia_page_title as getSummary
 from .wikimedia import get_wikimedia_page_summary as getSummary
+from .wikimedia import get_wikimedia_coordinates as getCoordinates
 
 
 app = Flask(__name__)
@@ -35,8 +36,13 @@ def parser():
 
     correct_input = trimSpace(trim(parsed_user_input))
     summary = getSummary(correct_input)
+    lat = getCoordinates(correct_input)[0]
+    lon = getCoordinates(correct_input)[1]
     parsedTextDisplayed = "<strong>GrandPyBot:</strong> " + summary
-    return jsonify(userMessage=userQuestion, apiAnswer=parsedTextDisplayed)
+    return jsonify(userMessage=userQuestion,
+                   apiAnswer=parsedTextDisplayed,
+                   latitude=lat,
+                   longitude=lon)
 
 
 if __name__ == "__main__":
