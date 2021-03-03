@@ -6,7 +6,7 @@ header{
 	display:flex;
 	justify-content:center;
 	align-items:center;
-	background-color:rgba(64,140,153,0.5);
+	background-color:rgba(64,140,153,1);
 	color:#ffffff;
 }
 
@@ -48,7 +48,7 @@ input {
 	display: none;
 	height:100px;
 	width:100px;
-	background:  url(../img/Spinner-1s-200px.gif) no-repeat center center;
+	background:  url(../img/Spinner200px.gif) no-repeat center center;
 	background-position:center;
 	z-index: 10000;
 }
@@ -64,7 +64,7 @@ footer{
 	left:0;
 	height:fit-content;
 	width:100%;
-	background-color:rgba(64,140,153,0.5);
+	background-color:rgba(64,140,153,1);
 	color:#ffffff;
 	bottom:0;
 	display:flex;
@@ -82,7 +82,7 @@ footer > div{
 
 #answerZone{
 	display:flex;
-	justify-content: space-between;
+	justify-content: space-around;
     align-items: center;
 	flex-wrap:wrap;
 	margin-top: 20px;
@@ -90,6 +90,7 @@ footer > div{
 }
 
 #answer{
+	display:none;
 	width:45%;
 	min-width: 150px;
 	font-size: 0.8em;
@@ -112,9 +113,10 @@ footer > div{
 }
 
 #map{
-
+	display:none;
 	height:300px;
 	width:45%;
+	min-width:400px;
 	
 }
 

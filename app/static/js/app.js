@@ -4,6 +4,7 @@ $(document).ready(function () {
     let marker
     const answer_zone = $('#answer');
     const loader = $('#loader');
+    const mapDiv = ($('#map'))
 
     function initMap(myPos) {
         map = new google.maps.Map(document.getElementById("map"), {
@@ -44,6 +45,10 @@ $(document).ready(function () {
             error: function () {
                 console.log('oops, something went wrong');
             }
-        }).done(function () { loader.hide(); })
+        }).done(function () {
+            loader.hide();
+            mapDiv.show();
+            answer_zone.show();
+        })
     })
 })
