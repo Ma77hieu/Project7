@@ -34,26 +34,39 @@ def get_wikimedia_page_title(location):
     # print(exact_page_infos.text)
     infos_json = json.loads(exact_page_infos.content.decode('utf-8'))
     # print(infos_json)
-    exact_page_title = infos_json["query"]["search"][0]["title"]
-    print("\none matching page found: {}".format(exact_page_title))
-    return exact_page_title
+    if not infos_json["query"]["search"]:
+        print("pas de lieu trouvé")
+        return "no title found"
+    else:
+        exact_page_title = infos_json["query"]["search"][0]["title"]
+        print("\none matching page found: {}".format(exact_page_title))
+        return exact_page_title
 
 
 def get_wikimedia_page_summary(userInput):
     """
     Retrieve the summary of a page thanks to its title
     """
-    summary_api_url = (
-        "https://fr.wikipedia.org/api/rest_v1/page/summary/"
-        + get_wikimedia_page_title(userInput))
-    # print(title_api_url)
-    whole_page_infos = requests.get(summary_api_url)
-    # print(exact_page_infos.text)
-    whole_page_json = json.loads(whole_page_infos.content.decode('utf-8'))
-    # print(infos_json)
-    page_extract = whole_page_json["extract"]
-    print("\n#######\nInfos\n#######\n{}".format(page_extract))
-    return page_extract
+    if get_wikimedia_page_title(userInput) != "no title found":
+        summary_api_url = (
+            "https://fr.wikipedia.org/api/rest_v1/page/summary/"
+            + get_wikimedia_page_title(userInput))
+        # print(title_api_url)
+        whole_page_infos = requests.get(summary_api_url)
+        # print(exact_page_infos.text)
+        whole_page_json = json.loads(whole_page_infos.content.decode('utf-8'))
+        # print(infos_json)
+        print("whole_page_json['type']: {}".format(whole_page_json["type"]))
+        if whole_page_json["type"] == "standard":
+            page_extract = whole_page_json["extract"]
+            print("\n#######\nInfos\n#######\n{}".format(page_extract))
+            return page_extract
+        else:
+            print("page summary return ambiguity")
+            return "ambiguity"
+    else:
+        print("page summary return no title found")
+        return "no title found"
 
 
 def get_wikimedia_coordinates(userInput):
@@ -85,5 +98,5 @@ if (__name__ == "__main__"):
     # get_wikimedia_page_summary(correct_title)
     # le%20musée%20d'art%20et%20d'histoire%20de%20Fribourg
     get_wikimedia_page_summary(
-        "chutes du Niagara")
+        "Invalides")
     get_wikimedia_coordinates("tour Eiffel")

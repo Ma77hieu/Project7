@@ -14,6 +14,8 @@ def parse(stringToParse):
     importantWordBefore = ["adresse de", "adresse des", "se trouve", "se trouvent",
                            "situe ", "situent", "situé ", "situés", "situées", "située"]
     importantWordAfter = [",", "?", "."]
+    if stringToParse[-1] not in importantWordAfter:
+        stringToParse = stringToParse+","
     for beforeWord in importantWordBefore:
         if beforeWord in stringToParse:
             breakWordLength = len(beforeWord)
@@ -59,7 +61,7 @@ if __name__ == "__main__":
 
     test_adresse_de = """Bonsoir Grandpy, j'espère que tu as passé une belle semaine. Est-ce que tu pourrais m'indiquer l'adresse de la tour eiffel? Merci d'avance et salutations à Mamie."""
 
-    test_pas_adresse = "Dessine moi un mouton"
+    test_pas_adresse = "se trouve la tour eiffel"
     # test1 = parse(test_se_trouve)
     # test2 = parse(test_adresse_de)
     test3 = parse(test_pas_adresse)

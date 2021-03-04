@@ -28,23 +28,35 @@ def parser():
     print("PARSED:{}".format(parsed_user_input))
     print("TRIMMED: {}".format(trim(parsed_user_input)))
     correct_input = trimSpace(trim(parsed_user_input))
+    print("TRIMMED SPACE: {}".format(correct_input))
     if correct_input != "no_location":
         summary = getSummary(correct_input)
-        parsedTextDisplayed = "<strong>GrandPyBot:</strong> " + summary
-        lat = getCoordinates(correct_input)[0]
-        lon = getCoordinates(correct_input)[1]
-        location_detected = True
+        print("SUMMARY RETURNED : {}".format(summary))
+        if summary not in ["ambiguity", "no title found"]:
+            parsedTextDisplayed = "<strong>GrandPyBot:</strong> " + summary
+            lat = getCoordinates(correct_input)[0]
+            lon = getCoordinates(correct_input)[1]
+            displayLocation = True
+        else:
+            lat = 0
+            lon = 0
+            displayLocation = False
+            if summary == "no title found":
+                parsedTextDisplayed = "<strong>GrandPyBot:</strong> Je n'ai pas compris le nom du lieu dont tu me parles"
+            if summary == "ambiguity":
+                parsedTextDisplayed = "<strong>GrandPyBot:</strong> Ce nom de lieu correspond à plusieurs choses, essaye d'être plus précis(e)"
+
     else:
         parsedTextDisplayed = "<strong>GrandPyBot:</strong> Tu es sûr qu'il y a un lieu dans ta question?"
         lat = 0
         lon = 0
-        location_detected = False
+        displayLocation = False
 
     return jsonify(userMessage=userQuestion,
                    apiAnswer=parsedTextDisplayed,
                    latitude=lat,
                    longitude=lon,
-                   location=location_detected)
+                   location=displayLocation)
 
 
 if __name__ == "__main__":
