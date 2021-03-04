@@ -19,16 +19,22 @@ $(document).ready(function () {
 
     $('form').on('submit', function (e) {
         e.preventDefault();
+        console.log($('#userInput').val());
         loader.show();
         $.ajax({
             url: 'parser',
             type: "POST",
+            data: {
+                "question": $('#userInput').val()
+            },
             success: function (responseJSON) {
-                // console.log(responseJSON)
+                console.log(responseJSON)
+                console.log(responseJSON.location)
                 let itemLat = responseJSON.latitude
                 // console.log(itemLat)
                 let itemLon = responseJSON.longitude
                 // console.log(itemLon)
+                // let locationFound = responseJSON.location
                 let userQuestion = responseJSON.userMessage
                 let parsedTextDisplayed = responseJSON.apiAnswer
                 // console.log(userQuestion)
@@ -39,8 +45,14 @@ $(document).ready(function () {
                 answer_zone.append(userMessage);
                 answer_zone.append(apiResponse);
                 // console.log('ca marche');
-                let myPos = { lat: itemLat, lng: itemLon };
-                initMap(myPos);
+                if (responseJSON.location == true) {
+                    let myPos = { lat: itemLat, lng: itemLon };
+                    initMap(myPos);
+                }
+                else {
+                    mapDiv.html("Pas de géolocalisation disponible")
+                }
+
             },
             error: function () {
                 console.log('oops, something went wrong');

@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 
-<!-- <html lang=""> -->
-<!-- To declare your language - read more here: https://www.w3.org/International/questions/qa-html-language-declarations -->
-
 <head>
     <title>GrandPyBot</title>
     <meta charset="utf-8">
@@ -23,12 +20,12 @@
     <div id="mainContent">
 
         <form action="{{ url_for('parser') }}" method="post">
-            <input type="text" name="question" required maxlength="255" style="height:5em;margin: 10px;"
+            <input type="text" id="userInput" name="question" required maxlength="255" style="height:5em;margin: 10px;"
                 placeholder="Dis moi gamin(e),tu avais une question?">
             <input type="submit" name="submitButton" value="Dis moi tout!">
         </form>
         <div id=answerZone>
-            <p id="loader"></p>
+            <div id="loader"></div>
             <div id="map">
             </div>
             <div id="answer">

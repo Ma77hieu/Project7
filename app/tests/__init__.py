@@ -1,1 +1,1 @@
-from app.parser import parse
+from app.inputParser import parse

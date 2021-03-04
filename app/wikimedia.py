@@ -13,15 +13,12 @@ def eliminate_space_char(location):
     Replace the space character with %20
     Mandatory to insert location in the api request
     """
-    char_pos = 0
-    for letter in location:
-        if letter == " ":
-            location = location[:char_pos] + "%20" + location[char_pos+1:]
-            char_pos += 1
-            print("The location has changed to {}".format(
-                location))
-        else:
-            char_pos += 1
+    if location != "no_location":
+        print("lieu en entrée {}".format(location))
+        location = location.replace(' ', '%20')
+        print("lieu avec les %20: {}".format(location))
+    else:
+        pass
     return location
 
 
@@ -88,5 +85,5 @@ if (__name__ == "__main__"):
     # get_wikimedia_page_summary(correct_title)
     # le%20musée%20d'art%20et%20d'histoire%20de%20Fribourg
     get_wikimedia_page_summary(
-        "tour Eiffel")
+        "chutes du Niagara")
     get_wikimedia_coordinates("tour Eiffel")
