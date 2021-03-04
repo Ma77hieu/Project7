@@ -4,6 +4,12 @@ from app.wikimedia import get_wikimedia_page_summary as get_summary
 from app.wikimedia import get_wikimedia_coordinates as get_coordinates
 
 
+# def test_get_wikimedia_page_title_OK(mocker):
+#     mocker.patch('app.wikimedia.get_wikimedia_page_title.requests.get',
+#                  return_value=C_.TITLE_API_OK)
+#     resultOK = get_title("tour"+"%20"+"Eiffel")
+#     assert resultOK == "Tour Eiffel"
+
 def test_get_wikimedia_page_title_OK():
     resultOK = get_title("tour"+"%20"+"Eiffel")
     assert resultOK == "Tour Eiffel"
