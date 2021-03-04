@@ -50,7 +50,14 @@ $(document).ready(function () {
                     initMap(myPos);
                 }
                 else {
-                    mapDiv.html("Pas de géolocalisation disponible")
+                    mapDiv.css({
+                        "display": "flex",
+                        "flex-direction": "column",
+                        "justify-content": "center",
+                        "align-items": "center",
+                        "color": "red"
+                    })
+                    mapDiv.html("<p>Pas de géolocalisation disponible</p>")
                 }
 
             },

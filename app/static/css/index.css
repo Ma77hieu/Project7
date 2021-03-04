@@ -120,5 +120,12 @@ footer > div{
 	
 }
 
+#locationError{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+}
+
 
 
