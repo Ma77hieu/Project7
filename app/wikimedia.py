@@ -1,11 +1,8 @@
+"""
+Data extraction from wikimedia API
+"""
 import requests
 import json
-
-# # Exemple de requete pour avoriu el titre
-# https://fr.wikipedia.org/w/api.php?action=query&list=search&srlimit=1&format=json&srsearch=tour%20eiffel
-
-# #exemple pour le summary
-# https://fr.wikipedia.org/api/rest_v1/page/summary/Tour%20Eiffel
 
 
 def eliminate_space_char(location):
@@ -84,9 +81,13 @@ def get_wikimedia_coordinates(userInput):
     partial_JSON = whole_page_json["query"]["pages"]
     page_id = str(list(partial_JSON.keys())[0])
     # page_id = page_id.replace("'", '"')
-    lat = whole_page_json["query"]["pages"][page_id]["coordinates"][0]["lat"]
-    lon = whole_page_json["query"]["pages"][page_id]["coordinates"][0]["lon"]
-    print("\n#######\nInfos\n#######\nlatitude:{}\nlongitude: {}".format(lat, lon))
+    if "coordinates" in whole_page_json["query"]["pages"][page_id]:
+        lat = whole_page_json["query"]["pages"][page_id]["coordinates"][0]["lat"]
+        lon = whole_page_json["query"]["pages"][page_id]["coordinates"][0]["lon"]
+        print("\n#######\nInfos\n#######\nlatitude:{}\nlongitude: {}".format(lat, lon))
+    else:
+        lat = 0
+        lon = 0
     return lat, lon
 
 

@@ -26,16 +26,22 @@ h1 {
 
 form {
     margin:auto;
-    display: grid;
-    grid-template-columns:fit-content(90%); 
+    display: flex;
+    width:70%;
+	flex-direction: column; 
 	justify-content: center;
+	align-items:center;
 }
 
+
 input {
-    margin:auto;
-    display: grid;
-    grid-template-columns:fit-content(90%); 
-	justify-content: center;
+    width:70%;
+	text-align:center;
+	word-break: break-word;
+}
+
+#submitButton{
+	width:150px;
 }
 
 

@@ -19,10 +19,10 @@
 
     <div id="mainContent">
 
-        <form action="{{ url_for('parser') }}" method="post">
+        <form>
             <input type="text" id="userInput" name="question" required maxlength="255" style="height:5em;margin: 10px;"
                 placeholder="Dis moi gamin(e),tu avais une question?">
-            <input type="submit" name="submitButton" value="Dis moi tout!">
+            <input type="submit" id="submitButton" name="submitButton" value="Dis moi tout!">
         </form>
         <div id=answerZone>
             <div id="loader"></div>

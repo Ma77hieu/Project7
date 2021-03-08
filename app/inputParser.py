@@ -1,3 +1,7 @@
+"""
+Finds a location in a user inputed text
+"""
+
 
 def parse_exple():
     # for test purpose
@@ -11,7 +15,7 @@ def parse(stringToParse):
     parsedString = str
     parsing_done = False
     length = len(stringToParse)
-    importantWordBefore = ["adresse de", "adresse des", "se trouve", "se trouvent",
+    importantWordBefore = ["adresse de", "adresse d'", "adresse des", "se trouve", "se trouvent",
                            "situe ", "situent", "situé ", "situés", "situées", "située"]
     importantWordAfter = [",", "?", "."]
     if stringToParse[-1] not in importantWordAfter:

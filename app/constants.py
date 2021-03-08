@@ -1,3 +1,6 @@
+"""Constants used for this application
+"""
+
 TITLE_API_NOT_FOUND = {
     "batchcomplete": "",
     "query": {
@@ -109,3 +112,12 @@ COORDINATES_API_NO_DATA = {
         }
     }
 }
+
+
+test_se_trouve = """Salut grandpy! Comment s'est passé ta soirée avec Grandma hier soir? Au fait, pendant que j'y pense, pourrais-tu m'indiquer où se trouve le musée d'art et d'histoire de Fribourg, s'il te plaît?"""
+
+test_adresse_de = """Bonsoir Grandpy, j'espère que tu as passé une belle semaine. Est-ce que tu pourrais m'indiquer l'adresse de la tour eiffel? Merci d'avance et salutations à Mamie."""
+
+test_se_situent = "Dis moi Grandpy, tu pourrais me dire ou se situent les Invalides?"
+
+test_situées = "Grandpy, au fait, tu sais où sont situées les chutes du Niagara?"

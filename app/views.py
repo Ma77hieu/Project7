@@ -1,3 +1,6 @@
+"""
+Application routes definitions
+"""
 from flask import Flask, request, render_template, jsonify
 import json
 from .inputParser import parse as parse
@@ -18,6 +21,10 @@ def index():
 
 @app.route('/parser', methods=['POST'])
 def parser():
+    """
+    Extract location from userInput.
+    Returns formatted userInput, api response, coordinates for the map
+    """
     userInput = request.form.get("question")
     # userInput = request.data
     print("donnée reçue du formulaire: {}".format(userInput))
