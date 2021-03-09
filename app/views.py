@@ -59,6 +59,8 @@ def parser():
         lon = 0
         displayLocation = False
 
+        # userQuestion=
+
     return jsonify(userMessage=userQuestion,
                    apiAnswer=parsedTextDisplayed,
                    latitude=lat,
