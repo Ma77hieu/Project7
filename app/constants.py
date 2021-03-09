@@ -122,8 +122,10 @@ test_se_situent = "Dis moi Grandpy, tu pourrais me dire ou se situent les Invali
 
 test_situées = "Grandpy, au fait, tu sais où sont situées les chutes du Niagara?"
 
-ANSWER_NO_LOCATION_FOUND = "Je n'ai aps d'anecdote concernant le lieu dont tu me parles"
+ANSWER_NO_LOCATION_FOUND = "Tu es sûr qu'il y a un lieu dans ta question? Ne l'as tu pas mal orthographié ou oublié des majuscules? N'hésite pas à regarder le titre de la page wikipedia correspondante ;-)"
 
 ANSWER_AMBIGUITY = "Ce nom de lieu correspond à plusieurs choses, essaye d'être plus précis(e)"
 
-ANSWER_NO_LOCATION_INPUT = "Tu es sûr qu'il y a un lieu dans ta question?"
+ANSWER_NO_LOCATION_INPUT = "Tu es sûr de bien me demander une localisation? Voici un exemple: où se trouve la tour Eiffel?"
+
+NO_ADDRESS_FOUND = "Je n'ai pas trouvé d'adresse"

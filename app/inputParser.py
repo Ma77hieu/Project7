@@ -38,7 +38,7 @@ def extract_location_from_text(stringToParse):
 
     if parsing_done == False:
         print("Pas de lieu identifié par le parser")
-        return "no_location"
+        return "no_location_in_input"
 
 
 def eliminate_space_char(location):
@@ -46,7 +46,7 @@ def eliminate_space_char(location):
     Replace the space character with %20
     Mandatory to insert location in the api request
     """
-    if location != "no_location":
+    if location != "no_location_in_input":
         # print("lieu en entrée {}".format(location))
         location = location.replace(' ', '%20')
         # print("lieu avec les %20: {}".format(location))
@@ -59,7 +59,7 @@ def trim_article_location(location):
     """
     Remove article in the location like "la" in "la tour eiffel"
     """
-    if location != "no_location":
+    if location != "no_location_in_input":
         articles = ["la ", "le ", "les ", "l'"]
         trim_done = False
         while trim_done != True:

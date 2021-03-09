@@ -3,6 +3,7 @@ Data extraction from places API
 """
 import requests
 import json
+import app.constants as C
 
 
 def get_places_info(location):
@@ -17,10 +18,11 @@ def get_places_info(location):
     # print(exact_page_infos.text)
     infos_json = json.loads(exact_page_infos.content.decode('utf-8'))
     print("infos json {}".format(infos_json))
+    print("infos json status{}".format(infos_json["status"]))
     # print(infos_json)
-    if not infos_json["candidates"][0]["formatted_address"]:
+    if infos_json["status"] == 'ZERO_RESULTS':
         print("pas de lieu trouvé")
-        return "Pas d'adresse trouvée", 0, 0, False
+        return C.NO_ADDRESS_FOUND, 0, 0, False
     else:
         exact_address = infos_json["candidates"][0]["formatted_address"]
         print("\nexact address: {}".format(exact_address))

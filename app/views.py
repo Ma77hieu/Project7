@@ -28,17 +28,10 @@ def parser():
     Returns formatted userInput, api response, coordinates for the map
     """
     userInput = request.form.get("question")
-    # userInput = request.data
-    print("donnée reçue du formulaire: {}".format(userInput))
-    # userInput = "Bonsoir Grandpy, j'espère que tu as passé une belle semaine. Est-ce que tu pourrais m'indiquer l'adresse de la tour eiffel? Merci d'avance et salutations à Mamie."
-    # print(userInput)
+    # print("donnée reçue du formulaire: {}".format(userInput))
     userQuestion = "<strong>Vous:</strong> " + userInput
     location = parse(userInput)
-    # print("PARSED:{}".format(parsed_user_input))
-    # print("TRIMMED: {}".format(trim(parsed_user_input)))
-    # correct_input = trimSpace(trim(parsed_user_input))
-    # print("TRIMMED SPACE: {}".format(correct_input))
-    if location != "no_location":
+    if location != "no_location_in_input":
         summary = getSummary(location)
         all_coordinates_data = getInfos(location)
         adress = all_coordinates_data[0]
@@ -46,20 +39,11 @@ def parser():
         lon = all_coordinates_data[2]
         displayLocation = all_coordinates_data[3]
         print("SUMMARY RETURNED : {}".format(summary))
-        # if summary not in ["ambiguity", "no title found"]:
-        parsedTextDisplayed1 = "<strong>GrandPyBot:</strong> L'adresse que tu cherches est:"+adress
         parsedTextDisplayed2 = "<strong>GrandPyBot:</strong> " + summary
-        #     lat = getInfos(location)[0]
-        #     lon = getInfos(location)[1]
-        #     displayLocation = True
-        # else:
-        #     lat = 0
-        #     lon = 0
-        #     displayLocation = False
-        # if summary == "no title found":
-        #     parsedTextDisplayed = "<strong>GrandPyBot:</strong> Je n'ai pas compris le nom du lieu dont tu me parles"
-        # if summary == "ambiguity":
-        #     parsedTextDisplayed = "<strong>GrandPyBot:</strong> Ce nom de lieu correspond à plusieurs choses, essaye d'être plus précis(e)"
+        if adress == C.NO_ADDRESS_FOUND:
+            parsedTextDisplayed1 = "<strong>GrandPyBot:</strong> "+C.NO_ADDRESS_FOUND
+        else:
+            parsedTextDisplayed1 = "<strong>GrandPyBot:</strong> L'adresse que tu cherches est:"+adress
 
     else:
         parsedTextDisplayed1 = "<strong>GrandPyBot:</strong>"+C.ANSWER_NO_LOCATION_INPUT
