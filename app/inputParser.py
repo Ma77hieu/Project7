@@ -8,7 +8,7 @@ def parse_exple():
     return "OK"
 
 
-def parse(stringToParse):
+def extract_location_from_text(stringToParse):
     """
     Locate and extract a location from a text
     """
@@ -33,7 +33,7 @@ def parse(stringToParse):
                         parsing_done = True
                     else:
                         pass
-            print(parsedString)
+            # print(parsedString)
             return parsedString
 
     if parsing_done == False:
@@ -41,23 +41,48 @@ def parse(stringToParse):
         return "no_location"
 
 
+def eliminate_space_char(location):
+    """
+    Replace the space character with %20
+    Mandatory to insert location in the api request
+    """
+    if location != "no_location":
+        # print("lieu en entrée {}".format(location))
+        location = location.replace(' ', '%20')
+        # print("lieu avec les %20: {}".format(location))
+    else:
+        pass
+    return location
+
+
 def trim_article_location(location):
     """
     Remove article in the location like "la" in "la tour eiffel"
     """
-    articles = ["la ", "le ", "les ", "l'"]
-    trim_done = False
-    while trim_done != True:
-        for article in articles:
-            if article in location[:5]:
-                trimmedLocation = location.replace(article, '')
+    if location != "no_location":
+        articles = ["la ", "le ", "les ", "l'"]
+        trim_done = False
+        while trim_done != True:
+            for article in articles:
+                if article in location[:5]:
+                    trimmedLocation = location.replace(article, '')
+                    trim_done = True
+                    # print(trimmedLocation)
+                    return trimmedLocation
+            if trim_done == False:
+                # print(location)
                 trim_done = True
-                print(trimmedLocation)
-                return trimmedLocation
-        if trim_done == False:
-            print(location)
-            trim_done = True
-            return location
+                return location
+    else:
+        return location
+
+
+def parse(userInput):
+    location = extract_location_from_text(userInput)
+    location = trim_article_location(location)
+    location = eliminate_space_char(location)
+    print("Parser returns: {}".format(location))
+    return location
 
 
 if __name__ == "__main__":
@@ -65,10 +90,7 @@ if __name__ == "__main__":
 
     test_adresse_de = """Bonsoir Grandpy, j'espère que tu as passé une belle semaine. Est-ce que tu pourrais m'indiquer l'adresse de la tour eiffel? Merci d'avance et salutations à Mamie."""
 
-    test_pas_adresse = "se trouve la tour eiffel"
-    # test1 = parse(test_se_trouve)
-    # test2 = parse(test_adresse_de)
+    test_pas_adresse = "zergztgezerfgg"
+    test1 = parse(test_se_trouve)
+    test2 = parse(test_adresse_de)
     test3 = parse(test_pas_adresse)
-    # trim_article_location(test1)
-    # trim_article_location(test2)
-    trim_article_location(test3)

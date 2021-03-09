@@ -10,7 +10,7 @@ def get_places_info(location):
     Retrieve the adress, name and coordinates of a text query
     """
     title_api_url = (
-        "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?key=AIzaSyBb1I8LSNj-gteObL0HKS0JqrvBJE2_PY8&inputtype=textquery&fields=formatted_address,geometry,name&input="
+        "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?key=AIzaSyCLxwXUeeOxqKdY2hF7pfBHi9sfKP25014&inputtype=textquery&fields=formatted_address,geometry,name&input="
         + location)
     # print(title_api_url)
     exact_page_infos = requests.get(title_api_url)
@@ -20,7 +20,7 @@ def get_places_info(location):
     # print(infos_json)
     if not infos_json["candidates"][0]["formatted_address"]:
         print("pas de lieu trouvé")
-        return "no title found"
+        return "Pas d'adresse trouvée", 0, 0, False
     else:
         exact_address = infos_json["candidates"][0]["formatted_address"]
         print("\nexact address: {}".format(exact_address))
@@ -28,7 +28,7 @@ def get_places_info(location):
         lon = infos_json["candidates"][0]["geometry"]["location"]["lng"]
         print("\nlat: {}".format(lat))
         print("\nlon: {}".format(lon))
-        return exact_address, lat, lon
+        return exact_address, lat, lon, True
 
 
 if (__name__ == "__main__"):

@@ -121,3 +121,9 @@ test_adresse_de = """Bonsoir Grandpy, j'espère que tu as passé une belle semai
 test_se_situent = "Dis moi Grandpy, tu pourrais me dire ou se situent les Invalides?"
 
 test_situées = "Grandpy, au fait, tu sais où sont situées les chutes du Niagara?"
+
+ANSWER_NO_LOCATION_FOUND = "Je n'ai aps d'anecdote concernant le lieu dont tu me parles"
+
+ANSWER_AMBIGUITY = "Ce nom de lieu correspond à plusieurs choses, essaye d'être plus précis(e)"
+
+ANSWER_NO_LOCATION_INPUT = "Tu es sûr qu'il y a un lieu dans ta question?"

@@ -3,29 +3,33 @@ Data extraction from wikimedia API
 """
 import requests
 import json
+import app.constants as C
 
 
-def eliminate_space_char(location):
-    """
-    Replace the space character with %20
-    Mandatory to insert location in the api request
-    """
-    if location != "no_location":
-        print("lieu en entrée {}".format(location))
-        location = location.replace(' ', '%20')
-        print("lieu avec les %20: {}".format(location))
-    else:
-        pass
-    return location
+# def eliminate_space_char(location):
+#     """
+#     Replace the space character with %20
+#     Mandatory to insert location in the api request
+#     """
+#     if location != "no_location":
+#         print("lieu en entrée {}".format(location))
+#         location = location.replace(' ', '%20')
+#         print("lieu avec les %20: {}".format(location))
+#     else:
+#         pass
+#     return location
 
 
 def get_wikimedia_page_title(location):
     """
     Retrieve the exact name of the page to access its content
     """
+    # title_api_url = (
+    #     "https://fr.wikipedia.org/w/api.php?action=query&list=search&srlimit=1&format=json&srwhat=nearmatch&srsearch="
+    #     + eliminate_space_char(location))
     title_api_url = (
         "https://fr.wikipedia.org/w/api.php?action=query&list=search&srlimit=1&format=json&srwhat=nearmatch&srsearch="
-        + eliminate_space_char(location))
+        + location)
     # print(title_api_url)
     exact_page_infos = requests.get(title_api_url)
     # print(exact_page_infos.text)
@@ -59,11 +63,9 @@ def get_wikimedia_page_summary(userInput):
             print("\n#######\nInfos\n#######\n{}".format(page_extract))
             return page_extract
         else:
-            print("page summary return ambiguity")
-            return "ambiguity"
+            return C.ANSWER_AMBIGUITY
     else:
-        print("page summary return no title found")
-        return "no title found"
+        return C.ANSWER_NO_LOCATION_FOUND
 
 
 def get_wikimedia_coordinates(userInput):

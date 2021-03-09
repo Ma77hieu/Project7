@@ -6,6 +6,8 @@ $(document).ready(function () {
     const loader = $('#loader');
     const mapDiv = ($('#map'))
 
+
+
     function initMap(myPos) {
         map = new google.maps.Map(document.getElementById("map"), {
             center: myPos,
@@ -18,6 +20,11 @@ $(document).ready(function () {
     }
 
     $('form').on('submit', function (e) {
+        const messagesApi = $('.apiResponse')
+        const messagesUser = $('.userMessage')
+        messagesApi.remove()
+        messagesUser.remove()
+        mapDiv.empty()
         e.preventDefault();
         console.log($('#userInput').val());
         loader.show();
@@ -28,6 +35,7 @@ $(document).ready(function () {
                 "question": $('#userInput').val()
             },
             success: function (responseJSON) {
+
                 console.log(responseJSON)
                 console.log(responseJSON.location)
                 let itemLat = responseJSON.latitude
@@ -36,14 +44,19 @@ $(document).ready(function () {
                 // console.log(itemLon)
                 // let locationFound = responseJSON.location
                 let userQuestion = responseJSON.userMessage
-                let parsedTextDisplayed = responseJSON.apiAnswer
+                let parsedTextDisplayed1 = responseJSON.apiAnswer1
+                let parsedTextDisplayed2 = responseJSON.apiAnswer2
                 // console.log(userQuestion)
                 // console.log(parsedTextDisplayed)
                 let userMessage = ("<div class='userMessage'>" + userQuestion + "</div>");
-                let apiResponse = ("<div class='apiResponse'>" + parsedTextDisplayed + "</div>");
+                let apiResponse1 = ("<div class='apiResponse'>" + parsedTextDisplayed1 + "</div>");
                 answer_zone.css('display', 'block')
                 answer_zone.append(userMessage);
-                answer_zone.append(apiResponse);
+                answer_zone.append(apiResponse1);
+                if (parsedTextDisplayed2 != "") {
+                    let apiResponse2 = ("<div class='apiResponse'>" + parsedTextDisplayed2 + "</div>");
+                    answer_zone.append(apiResponse2);
+                }
                 // console.log('ca marche');
                 if (responseJSON.location == true) {
                     let myPos = { lat: itemLat, lng: itemLon };
