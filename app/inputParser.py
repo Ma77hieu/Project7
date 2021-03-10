@@ -15,8 +15,11 @@ def extract_location_from_text(stringToParse):
     parsedString = str
     parsing_done = False
     length = len(stringToParse)
-    importantWordBefore = ["adresse de", "adresse d'", "adresse des", "se trouve", "se trouvent",
-                           "situe ", "situent", "situé ", "situés", "situées", "située"]
+    importantWordBefore = ["adresse de", "adresse d'",
+                           "adresse des", "se trouve", "se trouvent",
+                           "situe ", "situent", "situé ",
+                           "situés", "situées", "située", "trouver"]
+    # "trouver" for scenario "où je peux trouver"
     importantWordAfter = [",", "?", "."]
     if stringToParse[-1] not in importantWordAfter:
         stringToParse = stringToParse+","
@@ -25,7 +28,7 @@ def extract_location_from_text(stringToParse):
             breakWordLength = len(beforeWord)
             startIndex = stringToParse.find(beforeWord)+breakWordLength
             parsedString = stringToParse[startIndex:length+1]
-            while parsing_done == False:
+            while parsing_done is False:
                 for afterWord in importantWordAfter:
                     if afterWord in parsedString:
                         endIndex = parsedString.find(afterWord)
@@ -36,7 +39,7 @@ def extract_location_from_text(stringToParse):
             # print(parsedString)
             return parsedString
 
-    if parsing_done == False:
+    if parsing_done is False:
         print("Pas de lieu identifié par le parser")
         return "no_location_in_input"
 
@@ -62,14 +65,14 @@ def trim_article_location(location):
     if location != "no_location_in_input":
         articles = ["la ", "le ", "les ", "l'"]
         trim_done = False
-        while trim_done != True:
+        while trim_done is not True:
             for article in articles:
                 if article in location[:5]:
                     trimmedLocation = location.replace(article, '')
                     trim_done = True
                     # print(trimmedLocation)
                     return trimmedLocation
-            if trim_done == False:
+            if trim_done is False:
                 # print(location)
                 trim_done = True
                 return location
@@ -86,9 +89,18 @@ def parse(userInput):
 
 
 if __name__ == "__main__":
-    test_se_trouve = """Salut grandpy! Comment s'est passé ta soirée avec Grandma hier soir? Au fait, pendant que j'y pense, pourrais-tu m'indiquer où se trouve le musée d'art et d'histoire de Fribourg, s'il te plaît?"""
+    test_se_trouve = (
+        "Salut grandpy! Comment s'est passé"
+        " ta soirée avec Grandma hier soir? "
+        "Au fait, pendant que j'y pense, pourrais-tu m'indiquer"
+        " où se trouve le musée d'art et d'histoire de Fribourg,"
+        " s'il te plaît?")
 
-    test_adresse_de = """Bonsoir Grandpy, j'espère que tu as passé une belle semaine. Est-ce que tu pourrais m'indiquer l'adresse de la tour eiffel? Merci d'avance et salutations à Mamie."""
+    test_adresse_de = (
+        "Bonsoir Grandpy, "
+        "j'espère que tu as passé une belle semaine."
+        " Est-ce que tu pourrais m'indiquer l'adresse"
+        " de la tour eiffel? Merci d'avance et salutations à Mamie.")
 
     test_pas_adresse = "zergztgezerfgg"
     test1 = parse(test_se_trouve)

@@ -24,11 +24,10 @@ def get_wikimedia_page_title(location):
     """
     Retrieve the exact name of the page to access its content
     """
-    # title_api_url = (
-    #     "https://fr.wikipedia.org/w/api.php?action=query&list=search&srlimit=1&format=json&srwhat=nearmatch&srsearch="
-    #     + eliminate_space_char(location))
     title_api_url = (
-        "https://fr.wikipedia.org/w/api.php?action=query&list=search&srlimit=1&format=json&srwhat=nearmatch&srsearch="
+        "https://fr.wikipedia.org/w/api.php?"
+        "action=query&list=search&srlimit=1&format=json"
+        "&srwhat=nearmatch&srsearch="
         + location)
     # print(title_api_url)
     exact_page_infos = requests.get(title_api_url)
@@ -73,20 +72,22 @@ def get_wikimedia_coordinates(userInput):
     Retrieve the coordinates of a wikir essource thanks to its title
     """
     coordinates_api_url = (
-        "https://fr.wikipedia.org/w/api.php?action=query&prop=coordinates&format=json&titles="
+        "https://fr.wikipedia.org/w/api.php?"
+        "action=query&prop=coordinates&format=json&titles="
         + get_wikimedia_page_title(userInput))
     # print(title_api_url)
     whole_page_infos = requests.get(coordinates_api_url)
     # print(exact_page_infos.text)
-    whole_page_json = json.loads(whole_page_infos.content.decode('utf-8'))
+    whole_json = json.loads(whole_page_infos.content.decode('utf-8'))
     # print(infos_json)
-    partial_JSON = whole_page_json["query"]["pages"]
+    partial_JSON = whole_json["query"]["pages"]
     page_id = str(list(partial_JSON.keys())[0])
     # page_id = page_id.replace("'", '"')
-    if "coordinates" in whole_page_json["query"]["pages"][page_id]:
-        lat = whole_page_json["query"]["pages"][page_id]["coordinates"][0]["lat"]
-        lon = whole_page_json["query"]["pages"][page_id]["coordinates"][0]["lon"]
-        print("\n#######\nInfos\n#######\nlatitude:{}\nlongitude: {}".format(lat, lon))
+    if "coordinates" in whole_json["query"]["pages"][page_id]:
+        lat = whole_json["query"]["pages"][page_id]["coordinates"][0]["lat"]
+        lon = whole_json["query"]["pages"][page_id]["coordinates"][0]["lon"]
+        print("\n#######\nInfos\n#######"
+              "\nlatitude:{}\nlongitude: {}".format(lat, lon))
     else:
         lat = 0
         lon = 0

@@ -2,13 +2,8 @@
 Application routes definitions
 """
 from flask import Flask, request, render_template, jsonify
-import json
 from .inputParser import parse as parse
-# from .inputParser import trim_article_location as trim
-# from .wikimedia import eliminate_space_char as trimSpace
-# from .wikimedia import get_wikimedia_page_title as getSummary
 from .wikimedia import get_wikimedia_page_summary as getSummary
-# from .wikimedia import get_wikimedia_coordinates as getCoordinates
 from .apiplaces import get_places_info as getInfos
 import app.constants as C
 
@@ -41,25 +36,29 @@ def parser():
         print("SUMMARY RETURNED : {}".format(summary))
         parsedTextDisplayed2 = "<strong>GrandPyBot:</strong> " + summary
         if adress == C.NO_ADDRESS_FOUND:
-            parsedTextDisplayed1 = "<strong>GrandPyBot:</strong> "+C.NO_ADDRESS_FOUND
+            parsedTextDisplayed1 = ("<strong>GrandPyBot:</strong> "
+                                    + C.NO_ADDRESS_FOUND)
         else:
-            parsedTextDisplayed1 = "<strong>GrandPyBot:</strong> L'adresse que tu cherches est:"+adress
+            parsedTextDisplayed1 = ("<strong>GrandPyBot:</strong>"
+                                    " L'adresse que tu cherches est:"
+                                    + adress)
 
     else:
-        parsedTextDisplayed1 = "<strong>GrandPyBot:</strong>"+C.ANSWER_NO_LOCATION_INPUT
+        parsedTextDisplayed1 = ("<strong>GrandPyBot:</strong>"
+                                + C.ANSWER_NO_LOCATION_INPUT)
         parsedTextDisplayed2 = ""
         lat = 0
         lon = 0
         displayLocation = False
 
-        # userQuestion=
+    response = jsonify(userMessage=userQuestion,
+                       apiAnswer1=parsedTextDisplayed1,
+                       apiAnswer2=parsedTextDisplayed2,
+                       latitude=lat,
+                       longitude=lon,
+                       location=displayLocation)
 
-    return jsonify(userMessage=userQuestion,
-                   apiAnswer1=parsedTextDisplayed1,
-                   apiAnswer2=parsedTextDisplayed2,
-                   latitude=lat,
-                   longitude=lon,
-                   location=displayLocation)
+    return response
 
 
 if __name__ == "__main__":

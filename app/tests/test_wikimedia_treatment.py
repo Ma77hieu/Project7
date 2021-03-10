@@ -42,7 +42,7 @@ def test_get_wikimedia_page_summary_FAIL():
     Test the wikipedia page summary retrieving with INcorrect input
     """
     resultFAIL = get_summary("onfzubteundu")
-    assert resultFAIL == "no title found"
+    assert resultFAIL == C_.ANSWER_NO_LOCATION_FOUND
 
 
 def test_get_wikimedia_page_summary_AMBIGUOUS():
@@ -50,7 +50,7 @@ def test_get_wikimedia_page_summary_AMBIGUOUS():
     Test the wikipedia page summary retrieving with ambiguous input
     """
     resultAMBIGUOUS = get_summary("Invalides")
-    assert resultAMBIGUOUS == "ambiguity"
+    assert resultAMBIGUOUS == C_.ANSWER_AMBIGUITY
 
 
 def test_get_wikimedia_coordinates_OK():

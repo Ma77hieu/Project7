@@ -11,7 +11,10 @@ def get_places_info(location):
     Retrieve the adress, name and coordinates of a text query
     """
     title_api_url = (
-        "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?key=AIzaSyCLxwXUeeOxqKdY2hF7pfBHi9sfKP25014&inputtype=textquery&fields=formatted_address,geometry,name&input="
+        "https://maps.googleapis.com/maps/api/"
+        "place/findplacefromtext/json"
+        "?key=AIzaSyCLxwXUeeOxqKdY2hF7pfBHi9sfKP25014"
+        "&inputtype=textquery&fields=formatted_address,geometry,name&input="
         + location)
     # print(title_api_url)
     exact_page_infos = requests.get(title_api_url)
