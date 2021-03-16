@@ -7,7 +7,7 @@ import json
 import app.constants as C
 # from decouple import config
 # API_KEY_PLACES_TEST = config('PLACES')
-API_KEY_PLACES = os.getenv("API_KEY_PLACES")
+API_KEY_PLACES = os.environ.get("API_KEY_PLACES")
 
 
 def get_places_info(location):
