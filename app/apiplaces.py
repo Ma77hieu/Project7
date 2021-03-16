@@ -5,8 +5,8 @@ import os
 import requests
 import json
 import app.constants as C
-from decouple import config
-API_KEY_PLACES_TEST = config('PLACES')
+# from decouple import config
+# API_KEY_PLACES_TEST = config('PLACES')
 API_KEY_PLACES = os.getenv("API_KEY_PLACES")
 
 
