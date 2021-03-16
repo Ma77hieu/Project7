@@ -1,23 +1,9 @@
 """
-Data extraction from wikimedia API
+Data extraction from wikimedia APIpo9*-
 """
 import requests
 import json
-import app.constants as C
-
-
-# def eliminate_space_char(location):
-#     """
-#     Replace the space character with %20
-#     Mandatory to insert location in the api request
-#     """
-#     if location != "no_location":
-#         print("lieu en entrée {}".format(location))
-#         location = location.replace(' ', '%20')
-#         print("lieu avec les %20: {}".format(location))
-#     else:
-#         pass
-#     return location
+from app.constants import (ANSWER_AMBIGUITY, ANSWER_NO_LOCATION_FOUND)
 
 
 def get_wikimedia_page_title(location):
@@ -31,7 +17,10 @@ def get_wikimedia_page_title(location):
         + location)
     # print(title_api_url)
     exact_page_infos = requests.get(title_api_url)
-    # print(exact_page_infos.text)
+    # print("Response:{}".format(exact_page_infos))
+    # print("list dict:{}".format(exact_page_infos.__dict__))
+    # print("content:{}".format(exact_page_infos.content))
+    # print("type:{}".format(type(exact_page_infos)))
     infos_json = json.loads(exact_page_infos.content.decode('utf-8'))
     # print(infos_json)
     if not infos_json["query"]["search"]:
@@ -51,10 +40,11 @@ def get_wikimedia_page_summary(userInput):
         summary_api_url = (
             "https://fr.wikipedia.org/api/rest_v1/page/summary/"
             + get_wikimedia_page_title(userInput))
-        # print(title_api_url)
+        print(summary_api_url)
         whole_page_infos = requests.get(summary_api_url)
-        # print(exact_page_infos.text)
+        print(whole_page_infos)
         whole_page_json = json.loads(whole_page_infos.content.decode('utf-8'))
+        # whole_page_json = json.loads(whole_page_infos)
         # print(infos_json)
         print("whole_page_json['type']: {}".format(whole_page_json["type"]))
         if whole_page_json["type"] == "standard":
@@ -62,9 +52,9 @@ def get_wikimedia_page_summary(userInput):
             print("\n#######\nInfos\n#######\n{}".format(page_extract))
             return page_extract
         else:
-            return C.ANSWER_AMBIGUITY
+            return ANSWER_AMBIGUITY
     else:
-        return C.ANSWER_NO_LOCATION_FOUND
+        return ANSWER_NO_LOCATION_FOUND
 
 
 def get_wikimedia_coordinates(userInput):
@@ -102,5 +92,5 @@ if (__name__ == "__main__"):
     # get_wikimedia_page_summary(correct_title)
     # le%20musée%20d'art%20et%20d'histoire%20de%20Fribourg
     get_wikimedia_page_summary(
-        "Invalides")
+        "tour"+"%20"+"Eiffel")
     get_wikimedia_coordinates("tour Eiffel")

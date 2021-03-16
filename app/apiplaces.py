@@ -4,6 +4,8 @@ Data extraction from places API
 import requests
 import json
 import app.constants as C
+from decouple import config
+API_KEY_PLACES = config('PLACES')
 
 
 def get_places_info(location):
@@ -13,7 +15,7 @@ def get_places_info(location):
     title_api_url = (
         "https://maps.googleapis.com/maps/api/"
         "place/findplacefromtext/json"
-        "?key=AIzaSyCLxwXUeeOxqKdY2hF7pfBHi9sfKP25014"
+        "?key=" + API_KEY_PLACES +
         "&inputtype=textquery&fields=formatted_address,geometry,name&input="
         + location)
     # print(title_api_url)

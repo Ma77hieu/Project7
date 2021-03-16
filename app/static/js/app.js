@@ -26,6 +26,7 @@ $(document).ready(function () {
         messagesUser.remove()
         mapDiv.empty()
         e.preventDefault();
+        console.log(process.env.MAPS)
         console.log($('#userInput').val());
         loader.show();
         $.ajax({

@@ -14,7 +14,7 @@ TITLE_API_OK = {
         "search": [
             {
                 "ns": 0,
-                "title": "Tour Eiffel",
+                "title": "Tour erqgsrhbtrtyu",
                 "pageid": 1359783,
                 "size": 132731,
                 "wordcount": 19852,
@@ -171,7 +171,7 @@ test_situées = (
     "pourrais tu m'indiquer où sont situées les chutes du Niagara?")
 
 ANSWER_NO_LOCATION_FOUND = (
-    "Tu es sûr qu'il y a un lieu dans ta question? "
+    "Je n'ai pas d'informations plus détaillées sur ce lieu. "
     "Ne l'as tu pas mal orthographié ou oublié des majuscules? "
     "N'hésite pas à regarder le titre de la page wikipedia correspondante ;-)")
 
@@ -184,3 +184,6 @@ ANSWER_NO_LOCATION_INPUT = (
     " Voici un exemple: où se trouve la tour Eiffel?")
 
 NO_ADDRESS_FOUND = "Je n'ai pas trouvé d'adresse"
+
+REQUESTS_MODEL_RESPONSE = ({'batchcomplete': '', 'query': {'search': [{'ns': 0, 'title': 'Invalides', 'pageid': 137578,
+                                                                       'size': 1043, 'wordcount': 131, 'snippet': '', 'timestamp': '2019-04-02T13:48:21Z'}]}})

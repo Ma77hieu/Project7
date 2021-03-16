@@ -2,10 +2,10 @@
 Application routes definitions
 """
 from flask import Flask, request, render_template, jsonify
-from .inputParser import parse as parse
-from .wikimedia import get_wikimedia_page_summary as getSummary
-from .apiplaces import get_places_info as getInfos
-import app.constants as C
+from app.inputParser import parse as parse
+from app.wikimedia import get_wikimedia_page_summary as getSummary
+from app.apiplaces import get_places_info as getInfos
+from app.constants import (NO_ADDRESS_FOUND, ANSWER_NO_LOCATION_INPUT)
 
 
 app = Flask(__name__)
@@ -35,17 +35,17 @@ def parser():
         displayLocation = all_coordinates_data[3]
         print("SUMMARY RETURNED : {}".format(summary))
         parsedTextDisplayed2 = "<strong>GrandPyBot:</strong> " + summary
-        if adress == C.NO_ADDRESS_FOUND:
+        if adress == NO_ADDRESS_FOUND:
             parsedTextDisplayed1 = ("<strong>GrandPyBot:</strong> "
-                                    + C.NO_ADDRESS_FOUND)
+                                    + NO_ADDRESS_FOUND)
         else:
             parsedTextDisplayed1 = ("<strong>GrandPyBot:</strong>"
-                                    " L'adresse que tu cherches est:"
+                                    " L'adresse que tu cherches est: "
                                     + adress)
 
     else:
         parsedTextDisplayed1 = ("<strong>GrandPyBot:</strong>"
-                                + C.ANSWER_NO_LOCATION_INPUT)
+                                + ANSWER_NO_LOCATION_INPUT)
         parsedTextDisplayed2 = ""
         lat = 0
         lon = 0
