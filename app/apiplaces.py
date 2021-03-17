@@ -5,9 +5,7 @@ import os
 import requests
 import json
 import app.constants as C
-
-
-# API_KEY_PLACES = os.environ.get("API_KEY_PLACES")
+from config import API_KEY_PLACES
 
 
 def get_places_info(location):
