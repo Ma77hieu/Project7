@@ -5,8 +5,8 @@ import os
 import requests
 import json
 import app.constants as C
-from decouple import config
-API_KEY_PLACES = config('PLACES')
+
+
 # API_KEY_PLACES = os.environ.get("API_KEY_PLACES")
 
 

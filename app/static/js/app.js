@@ -6,6 +6,20 @@ $(document).ready(function () {
     const loader = $('#loader');
     const mapDiv = ($('#map'))
 
+    function escape(inputString) {
+        var toReplace = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;'
+        };
+        for (let charac in toReplace) {
+            inputString = inputString.replace(charac, toReplace[charac])
+            console.log("boucle for sur les caracteres a echapper")
+            console.log(inputString)
+        }
+        return inputString
+    };
+
 
 
     function initMap(myPos) {
@@ -26,14 +40,16 @@ $(document).ready(function () {
         messagesUser.remove()
         mapDiv.empty()
         e.preventDefault();
-        // console.log(process.env.MAPS)
-        console.log($('#userInput').val());
+        let questionNoXss = escape($('#userInput').val())
+        console.log("avant transfo, user input:" + $('#userInput').val())
+        console.log(escape("apres transfo, questionNoXss" + questionNoXss))
         loader.show();
         $.ajax({
             url: 'parser',
             type: "POST",
             data: {
-                "question": $('#userInput').val()
+                // "question": escape($('#userInput').val())
+                "question": questionNoXss
             },
             success: function (responseJSON) {
 
