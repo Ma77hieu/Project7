@@ -14,7 +14,7 @@ TITLE_API_OK = {
         "search": [
             {
                 "ns": 0,
-                "title": "Tour erqgsrhbtrtyu",
+                "title": "Tour Eiffel",
                 "pageid": 1359783,
                 "size": 132731,
                 "wordcount": 19852,
@@ -25,13 +25,14 @@ TITLE_API_OK = {
     }
 }
 
-SUMMARY_API_OK = ("La tour Eiffel est une tour de fer "
-                  "puddlé de 324 mètres de hauteur située à Paris,"
-                  " à l’extrémité"
-                  " nord-ouest du parc du Champ-de-Mars "
-                  "en bordure de la Seine"
-                  " dans le 7e arrondissement. Son adresse officielle est 5, "
-                  "avenue Anatole-France.")
+SUMMARY_API_OK = (
+    "La tour Eiffel est une tour de fer "
+    "puddlé de 324 mètres de hauteur située à Paris,"
+    " à l’extrémité"
+    " nord-ouest du parc du Champ-de-Mars "
+    "en bordure de la Seine"
+    " dans le 7e arrondissement. Son adresse officielle est 5, "
+    "avenue Anatole-France.")
 
 SUMMARY_API_AMBIGUOUS = {
     "type": "disambiguation",

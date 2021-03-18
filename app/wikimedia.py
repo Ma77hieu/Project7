@@ -4,14 +4,15 @@ Data extraction from wikimedia API
 import requests
 import json
 from app.constants import (ANSWER_AMBIGUITY, ANSWER_NO_LOCATION_FOUND)
+from app.apiplaces import get_json
 
 
-def get_json(api_url):
+def get_json_title(api_url):
+    """
+    Send the request to the API and converts the result into JSON    
+    """
     exact_page_infos = requests.get(api_url)
-    # print(exact_page_infos.text)
     extracted_json = json.loads(exact_page_infos.content.decode('utf-8'))
-    print("infos json {}".format(extracted_json))
-    # print(infos_json)
     return extracted_json
 
 
@@ -24,7 +25,7 @@ def get_wikimedia_page_title(location):
         "action=query&list=search&srlimit=1&format=json"
         "&srwhat=nearmatch&srsearch="
         + location)
-    infos_json = get_json(title_api_url)
+    infos_json = get_json_title(title_api_url)
     # print(infos_json)
     if not infos_json["query"]["search"]:
         print("pas de lieu trouvé")
@@ -35,6 +36,15 @@ def get_wikimedia_page_title(location):
         return exact_page_title
 
 
+def get_json_summary(api_url):
+    """
+    Send the request to the API and converts the result into JSON    
+    """
+    exact_page_infos = requests.get(api_url)
+    extracted_json = json.loads(exact_page_infos.content.decode('utf-8'))
+    return extracted_json
+
+
 def get_wikimedia_page_summary(userInput):
     """
     Retrieve the summary of a page thanks to its title
@@ -43,16 +53,15 @@ def get_wikimedia_page_summary(userInput):
         summary_api_url = (
             "https://fr.wikipedia.org/api/rest_v1/page/summary/"
             + get_wikimedia_page_title(userInput))
-        print(summary_api_url)
-        whole_page_infos = requests.get(summary_api_url)
-        print(whole_page_infos)
-        whole_page_json = json.loads(whole_page_infos.content.decode('utf-8'))
-        # whole_page_json = json.loads(whole_page_infos)
+        # print(summary_api_url)
+        # print(whole_page_infos)
+        # whole_page_json = json.loads(whole_page_infos.content.decode('utf-8'))
         # print(infos_json)
-        print("whole_page_json['type']: {}".format(whole_page_json["type"]))
+        # print("whole_page_json['type']: {}".format(whole_page_json["type"]))
+        whole_page_json = get_json_summary(summary_api_url)
         if whole_page_json["type"] == "standard":
             page_extract = whole_page_json["extract"]
-            print("\n#######\nInfos\n#######\n{}".format(page_extract))
+            # print("\n#######\nInfos\n#######\n{}".format(page_extract))
             return page_extract
         else:
             return ANSWER_AMBIGUITY
@@ -69,18 +78,17 @@ def get_wikimedia_coordinates(userInput):
         "action=query&prop=coordinates&format=json&titles="
         + get_wikimedia_page_title(userInput))
     # print(title_api_url)
-    whole_page_infos = requests.get(coordinates_api_url)
     # print(exact_page_infos.text)
-    whole_json = json.loads(whole_page_infos.content.decode('utf-8'))
     # print(infos_json)
+    whole_json = get_json(coordinates_api_url)
     partial_JSON = whole_json["query"]["pages"]
     page_id = str(list(partial_JSON.keys())[0])
     # page_id = page_id.replace("'", '"')
     if "coordinates" in whole_json["query"]["pages"][page_id]:
         lat = whole_json["query"]["pages"][page_id]["coordinates"][0]["lat"]
         lon = whole_json["query"]["pages"][page_id]["coordinates"][0]["lon"]
-        print("\n#######\nInfos\n#######"
-              "\nlatitude:{}\nlongitude: {}".format(lat, lon))
+        # print("\n#######\nInfos\n#######"
+        #       "\nlatitude:{}\nlongitude: {}".format(lat, lon))
     else:
         lat = 0
         lon = 0

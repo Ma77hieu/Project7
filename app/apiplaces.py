@@ -8,11 +8,14 @@ from config import API_KEY_PLACES
 
 
 def get_json(api_url):
+    """
+    Send the request to the API and converts the result into JSON    
+    """
     exact_page_infos = requests.get(api_url)
     # print(exact_page_infos.text)
     extracted_json = json.loads(exact_page_infos.content.decode('utf-8'))
-    print("infos json {}".format(extracted_json))
-    print("infos json status{}".format(extracted_json["status"]))
+    # print("infos json {}".format(extracted_json))
+    # print("infos json status{}".format(extracted_json["status"]))
     # print(infos_json)
     return extracted_json
 
