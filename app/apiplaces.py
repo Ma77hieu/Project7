@@ -1,11 +1,20 @@
 """
 Data extraction from places API
 """
-import os
 import requests
 import json
 import app.constants as C
 from config import API_KEY_PLACES
+
+
+def get_json(api_url):
+    exact_page_infos = requests.get(api_url)
+    # print(exact_page_infos.text)
+    extracted_json = json.loads(exact_page_infos.content.decode('utf-8'))
+    print("infos json {}".format(extracted_json))
+    print("infos json status{}".format(extracted_json["status"]))
+    # print(infos_json)
+    return extracted_json
 
 
 def get_places_info(location):
@@ -19,12 +28,7 @@ def get_places_info(location):
         "&inputtype=textquery&fields=formatted_address,geometry,name&input="
         + location)
     # print(title_api_url)
-    exact_page_infos = requests.get(title_api_url)
-    # print(exact_page_infos.text)
-    infos_json = json.loads(exact_page_infos.content.decode('utf-8'))
-    print("infos json {}".format(infos_json))
-    print("infos json status{}".format(infos_json["status"]))
-    # print(infos_json)
+    infos_json = get_json(title_api_url)
     if infos_json["status"] == 'ZERO_RESULTS':
         print("pas de lieu trouvé")
         return C.NO_ADDRESS_FOUND, 0, 0, False

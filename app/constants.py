@@ -184,6 +184,3 @@ ANSWER_NO_LOCATION_INPUT = (
     " Voici un exemple: où se trouve la tour Eiffel?")
 
 NO_ADDRESS_FOUND = "Je n'ai pas trouvé d'adresse"
-
-REQUESTS_MODEL_RESPONSE = ({'batchcomplete': '', 'query': {'search': [{'ns': 0, 'title': 'Invalides', 'pageid': 137578,
-                                                                       'size': 1043, 'wordcount': 131, 'snippet': '', 'timestamp': '2019-04-02T13:48:21Z'}]}})

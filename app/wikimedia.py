@@ -1,9 +1,18 @@
 """
-Data extraction from wikimedia APIpo9*-
+Data extraction from wikimedia API
 """
 import requests
 import json
 from app.constants import (ANSWER_AMBIGUITY, ANSWER_NO_LOCATION_FOUND)
+
+
+def get_json(api_url):
+    exact_page_infos = requests.get(api_url)
+    # print(exact_page_infos.text)
+    extracted_json = json.loads(exact_page_infos.content.decode('utf-8'))
+    print("infos json {}".format(extracted_json))
+    # print(infos_json)
+    return extracted_json
 
 
 def get_wikimedia_page_title(location):
@@ -15,13 +24,7 @@ def get_wikimedia_page_title(location):
         "action=query&list=search&srlimit=1&format=json"
         "&srwhat=nearmatch&srsearch="
         + location)
-    # print(title_api_url)
-    exact_page_infos = requests.get(title_api_url)
-    # print("Response:{}".format(exact_page_infos))
-    # print("list dict:{}".format(exact_page_infos.__dict__))
-    # print("content:{}".format(exact_page_infos.content))
-    # print("type:{}".format(type(exact_page_infos)))
-    infos_json = json.loads(exact_page_infos.content.decode('utf-8'))
+    infos_json = get_json(title_api_url)
     # print(infos_json)
     if not infos_json["query"]["search"]:
         print("pas de lieu trouvé")

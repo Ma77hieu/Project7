@@ -1,29 +1,19 @@
 """
 Tests for the wikimedia API response treatment
 """
-import urllib.request
-import requests
-import json
-from io import BytesIO
 import app.constants as C_
-from app.wikimedia import get_wikimedia_page_title as get_title
-from app.wikimedia import get_wikimedia_page_summary as get_summary
-from app.wikimedia import get_wikimedia_coordinates as get_coordinates
+from app.wikimedia import (get_wikimedia_page_title as get_title,
+                           get_wikimedia_page_summary as get_summary,
+                           get_wikimedia_coordinates as get_coordinates)
+import app.wikimedia as wikimedia
 
 
-def mockreturn_requestsGet(arg):
-    print("resultmock {}:".format(json.dumps(
-        C_.REQUESTS_MODEL_RESPONSE).encode('utf-8')))
-    return json.dumps(C_.REQUESTS_MODEL_RESPONSE).encode('utf-8')
-
-
-# def mockreturn_jsonLoads(arg):
-#     return C_.TITLE_API_OK
+def mockreturn_json(arg):
+    return C_.TITLE_API_OK
 
 
 def test_mock_get_wikimedia_page_title_OK(monkeypatch):
-    monkeypatch.setattr(requests, 'get', mockreturn_requestsGet)
-    # monkeypatch.setattr(json, 'loads', mockreturn_jsonLoads)
+    monkeypatch.setattr(wikimedia, "get_json", mockreturn_json)
     resultOK = get_title("tour"+"%20"+"Eiffel")
     assert resultOK == "Tour Eiffel"
 
