@@ -14,8 +14,6 @@ $(document).ready(function () {
         };
         for (let charac in toReplace) {
             inputString = inputString.replace(charac, toReplace[charac])
-            console.log("boucle for sur les caracteres a echapper")
-            console.log(inputString)
         }
         return inputString
     };
@@ -41,14 +39,11 @@ $(document).ready(function () {
         mapDiv.empty()
         e.preventDefault();
         let questionNoXss = escape($('#userInput').val())
-        console.log("avant transfo, user input:" + $('#userInput').val())
-        console.log(escape("apres transfo, questionNoXss" + questionNoXss))
         loader.show();
         $.ajax({
             url: 'parser',
             type: "POST",
             data: {
-                // "question": escape($('#userInput').val())
                 "question": questionNoXss
             },
             success: function (responseJSON) {
@@ -56,15 +51,10 @@ $(document).ready(function () {
                 console.log(responseJSON)
                 console.log(responseJSON.location)
                 let itemLat = responseJSON.latitude
-                // console.log(itemLat)
                 let itemLon = responseJSON.longitude
-                // console.log(itemLon)
-                // let locationFound = responseJSON.location
                 let userQuestion = responseJSON.userMessage
                 let parsedTextDisplayed1 = responseJSON.apiAnswer1
                 let parsedTextDisplayed2 = responseJSON.apiAnswer2
-                // console.log(userQuestion)
-                // console.log(parsedTextDisplayed)
                 let userMessage = ("<div class='userMessage'>" + userQuestion + "</div>");
                 let apiResponse1 = ("<div class='apiResponse'>" + parsedTextDisplayed1 + "</div>");
                 answer_zone.css('display', 'block')
@@ -74,7 +64,6 @@ $(document).ready(function () {
                     let apiResponse2 = ("<div class='apiResponse'>" + parsedTextDisplayed2 + "</div>");
                     answer_zone.append(apiResponse2);
                 }
-                // console.log('ca marche');
                 if (responseJSON.location == true) {
                     let myPos = { lat: itemLat, lng: itemLon };
                     initMap(myPos);

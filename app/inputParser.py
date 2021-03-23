@@ -3,11 +3,6 @@ Finds a location in a user inputed text
 """
 
 
-def parse_exple():
-    # for test purpose
-    return "OK"
-
-
 def extract_location_from_text(stringToParse):
     """
     Locate and extract a location from a text
@@ -36,7 +31,6 @@ def extract_location_from_text(stringToParse):
                         parsing_done = True
                     else:
                         pass
-            # print(parsedString)
             return parsedString
 
     if parsing_done is False:
@@ -50,9 +44,7 @@ def eliminate_space_char(location):
     Mandatory to insert location in the api request
     """
     if location != "no_location_in_input":
-        # print("lieu en entrée {}".format(location))
         location = location.replace(' ', '%20')
-        # print("lieu avec les %20: {}".format(location))
     else:
         pass
     return location
@@ -70,10 +62,8 @@ def trim_article_location(location):
                 if article in location[:5]:
                     trimmedLocation = location.replace(article, '')
                     trim_done = True
-                    # print(trimmedLocation)
                     return trimmedLocation
             if trim_done is False:
-                # print(location)
                 trim_done = True
                 return location
     else:

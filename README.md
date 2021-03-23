@@ -15,6 +15,9 @@ GrandPyBot will answer:
 >L'adresse que tu cherches est:Niagara Falls, NY 14303, États-Unis.
 >Les chutes du Niagara ou chutes Niagara, en anglais Niagara Falls, sont un ensemble de trois chutes d’eau situées sur la rivière Niagara qui relie le lac Érié au lac Ontario, dans l’est de l’Amérique du Nord, à la frontière entre le Canada et les États-Unis :le « Fer à Cheval » ou « chutes canadiennes » ; les « chutes américaines » ; le « voile de la mariée », d’une taille moindre.
 
+**Try it for yourself**
+https://grandpybot-mo.herokuapp.com/
+
 # Technical information
 
 **Languages used**

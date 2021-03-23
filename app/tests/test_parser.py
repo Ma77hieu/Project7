@@ -1,7 +1,6 @@
 """
 Tests regarding the parsing of user input
 """
-# from app.inputParser import parse_exple
 from app.inputParser import parse
 from app.constants import (test_se_trouve as SETROUVE,
                            test_adresse_de as ADRESSE,
