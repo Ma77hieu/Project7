@@ -1,7 +1,7 @@
 """
 Application routes definitions
 """
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, request, render_template
 from app.manager import BotAnswer
 
 app = Flask(__name__)

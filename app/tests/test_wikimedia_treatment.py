@@ -2,11 +2,8 @@
 Tests for the wikimedia and places API response treatment
 """
 import app.constants as C_
-# from app.wikimedia import (get_wikimedia_page_title as get_title,
-#                            get_wikimedia_page_summary as get_summary,
-#                            get_wikimedia_coordinates as get_coordinates)
 from app.wikimedia import WikiAnswer
-import app.wikimedia as wikimedia
+# import app.wikimedia as wikimedia
 
 # Tests regarding the retrieval of the TITLE of the wikipedia page:
 

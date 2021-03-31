@@ -4,7 +4,6 @@ Data extraction from wikimedia API
 import requests
 import json
 from app.constants import (ANSWER_AMBIGUITY, ANSWER_NO_LOCATION_FOUND)
-from app.apiplaces import Places
 
 
 class WikiAnswer:
@@ -37,7 +36,7 @@ class WikiAnswer:
     @classmethod
     def get_json_title(cls, api_url):
         """
-        Send the request to the API and converts the result into JSON    
+        Send the request to the API and converts the result into JSON
         """
         exact_page_infos = requests.get(api_url)
         extracted_json = json.loads(exact_page_infos.content.decode('utf-8'))
@@ -46,7 +45,7 @@ class WikiAnswer:
     @classmethod
     def get_json_summary(cls, api_url):
         """
-        Send the request to the API and converts the result into JSON    
+        Send the request to the API and converts the result into JSON
         """
         exact_page_infos = requests.get(api_url)
         extracted_json = json.loads(exact_page_infos.content.decode('utf-8'))

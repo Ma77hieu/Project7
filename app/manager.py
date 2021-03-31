@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, jsonify
+from flask import jsonify
 from app.inputParser import parse as parse
 from app.wikimedia import WikiAnswer
 from app.apiplaces import Places

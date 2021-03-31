@@ -67,13 +67,15 @@ SUMMARY_API_OK_2 = {
     "content_urls": {
         "desktop": {
             "page": "https://fr.wikipedia.org/wiki/Tour_Eiffel",
-            "revisions": "https://fr.wikipedia.org/wiki/Tour_Eiffel?action=history",
+            "revisions": ("https://fr.wikipedia.org/"
+                          "wiki/Tour_Eiffel?action=history"),
             "edit": "https://fr.wikipedia.org/wiki/Tour_Eiffel?action=edit",
             "talk": "https://fr.wikipedia.org/wiki/Discussion:Tour_Eiffel"
         },
         "mobile": {
             "page": "https://fr.m.wikipedia.org/wiki/Tour_Eiffel",
-            "revisions": "https://fr.m.wikipedia.org/wiki/Special:History/Tour_Eiffel",
+            "revisions": ("https://fr.m.wikipedia.org/"
+                          "wiki/Special:History/Tour_Eiffel"),
             "edit": "https://fr.m.wikipedia.org/wiki/Tour_Eiffel?action=edit",
             "talk": "https://fr.m.wikipedia.org/wiki/Discussion:Tour_Eiffel"
         }
