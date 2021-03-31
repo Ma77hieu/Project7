@@ -14,7 +14,8 @@ class WikiAnswer:
         self.title = self.get_wikimedia_page_title(location)
         self.summary = self.get_wikimedia_page_summary(self.title)
 
-    def get_wikimedia_page_title(self, location):
+    @classmethod
+    def get_wikimedia_page_title(cls, location):
         """
         Retrieve the exact name of the page to access its content
         """
@@ -23,7 +24,7 @@ class WikiAnswer:
             "action=query&list=search&srlimit=1&format=json"
             "&srwhat=nearmatch&srsearch="
             + location)
-        infos_json = self.get_json_title(title_api_url)
+        infos_json = WikiAnswer.get_json_title(title_api_url)
         # print(infos_json)
         if not infos_json["query"]["search"]:
             print("pas de lieu trouvé")
@@ -33,7 +34,8 @@ class WikiAnswer:
             print("\none matching page found: {}".format(exact_page_title))
             return exact_page_title
 
-    def get_json_title(self, api_url):
+    @classmethod
+    def get_json_title(cls, api_url):
         """
         Send the request to the API and converts the result into JSON    
         """
@@ -41,7 +43,8 @@ class WikiAnswer:
         extracted_json = json.loads(exact_page_infos.content.decode('utf-8'))
         return extracted_json
 
-    def get_json_summary(self, api_url):
+    @classmethod
+    def get_json_summary(cls, api_url):
         """
         Send the request to the API and converts the result into JSON    
         """
@@ -49,15 +52,16 @@ class WikiAnswer:
         extracted_json = json.loads(exact_page_infos.content.decode('utf-8'))
         return extracted_json
 
-    def get_wikimedia_page_summary(self, title):
+    @classmethod
+    def get_wikimedia_page_summary(cls, title):
         """
         Retrieve the summary of a page thanks to its title
         """
-        if self.get_wikimedia_page_title(title) != "no title found":
+        if WikiAnswer.get_wikimedia_page_title(title) != "no title found":
             summary_api_url = (
                 "https://fr.wikipedia.org/api/rest_v1/page/summary/"
-                + self.get_wikimedia_page_title(title))
-            whole_page_json = self.get_json_summary(summary_api_url)
+                + WikiAnswer.get_wikimedia_page_title(title))
+            whole_page_json = WikiAnswer.get_json_summary(summary_api_url)
             if whole_page_json["type"] == "standard":
                 page_extract = whole_page_json["extract"]
                 return page_extract
@@ -65,34 +69,6 @@ class WikiAnswer:
                 return ANSWER_AMBIGUITY
         else:
             return ANSWER_NO_LOCATION_FOUND
-
-    # def get_json_coordinates(api_url):
-    #     """
-    #     Send the request to the API and converts the result into JSON
-    #     """
-    #     exact_page_infos = requests.get(api_url)
-    #     extracted_json = json.loads(exact_page_infos.content.decode('utf-8'))
-    #     return extracted_json
-
-    # def get_wikimedia_coordinates(userInput):
-    #     """
-    #     Retrieve the coordinates of a wikir essource thanks to its title
-    #     """
-    #     coordinates_api_url = (
-    #         "https://fr.wikipedia.org/w/api.php?"
-    #         "action=query&prop=coordinates&format=json&titles="
-    #         + get_wikimedia_page_title(userInput))
-
-    #     whole_json = get_json_coordinates(coordinates_api_url)
-    #     partial_JSON = whole_json["query"]["pages"]
-    #     page_id = str(list(partial_JSON.keys())[0])
-    #     if "coordinates" in whole_json["query"]["pages"][page_id]:
-    #         lat = whole_json["query"]["pages"][page_id]["coordinates"][0]["lat"]
-    #         lon = whole_json["query"]["pages"][page_id]["coordinates"][0]["lon"]
-    #     else:
-    #         lat = 0
-    #         lon = 0
-    #     return lat, lon
 
 
 # if (__name__ == "__main__"):

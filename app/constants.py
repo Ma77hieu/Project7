@@ -244,7 +244,8 @@ test_situées = (
 ANSWER_NO_LOCATION_FOUND = (
     "Je n'ai pas d'informations plus détaillées sur ce lieu. "
     "Ne l'as tu pas mal orthographié ou oublié des majuscules? "
-    "N'hésite pas à regarder le titre de la page wikipedia correspondante ;-)")
+    "N'hésite pas à regarder le titre de la page wikipedia correspondante"
+    " en respectant bien les majuscules ;-)")
 
 ANSWER_AMBIGUITY = (
     "Ce nom de lieu correspond"
