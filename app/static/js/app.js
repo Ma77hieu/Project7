@@ -1,10 +1,10 @@
 
 $(document).ready(function () {
     let map;
-    let marker
-    const answer_zone = $('#answer');
-    const loader = $('#loader');
-    const mapDiv = ($('#map'))
+    let marker;
+
+
+
 
     function escape(inputString) {
         var toReplace = {
@@ -21,7 +21,8 @@ $(document).ready(function () {
 
 
     function initMap(myPos) {
-        map = new google.maps.Map(document.getElementById("map"), {
+        const lastmap = document.getElementsByClassName("map")[0];
+        map = new google.maps.Map(lastmap, {
             center: myPos,
             zoom: 16
         });
@@ -32,14 +33,21 @@ $(document).ready(function () {
     }
 
     $('form').on('submit', function (e) {
-        const messagesApi = $('.apiResponse')
-        const messagesUser = $('.userMessage')
-        messagesApi.remove()
-        messagesUser.remove()
-        mapDiv.empty()
+        // const lastMessagesApi = $('.apiResponse')[0]
+        // const lastMessagesUser = $('.userMessage')[0]
+        // lastMessagesApi.remove()
+        // lastMessagesUser.remove()
+        // mapDiv.empty()
+        const answerZone = $('#answerZone');
+        answerZone.prepend("<div class='map'></div><div class='answer'></div>");
+        // const row = answerZone.insertBefore(newRow, null);
+        const loader = $('#loader');
+
+
         e.preventDefault();
         let questionNoXss = escape($('#userInput').val())
         loader.show();
+
         $.ajax({
             url: 'parser',
             type: "POST",
@@ -47,7 +55,8 @@ $(document).ready(function () {
                 "question": questionNoXss
             },
             success: function (responseJSON) {
-
+                const mapDiv = $(".map:first");
+                const answer = $(".answer:first");
                 console.log(responseJSON)
                 console.log(responseJSON.location)
                 let itemLat = responseJSON.latitude
@@ -57,12 +66,12 @@ $(document).ready(function () {
                 let parsedTextDisplayed2 = responseJSON.apiAnswer2
                 let userMessage = ("<div class='userMessage'>" + userQuestion + "</div>");
                 let apiResponse1 = ("<div class='apiResponse'>" + parsedTextDisplayed1 + "</div>");
-                answer_zone.css('display', 'block')
-                answer_zone.append(userMessage);
-                answer_zone.append(apiResponse1);
+                answer.css('display', 'block')
+                answer.append(userMessage);
+                answer.append(apiResponse1);
                 if (parsedTextDisplayed2 != "") {
                     let apiResponse2 = ("<div class='apiResponse'>" + parsedTextDisplayed2 + "</div>");
-                    answer_zone.append(apiResponse2);
+                    answer.append(apiResponse2);
                 }
                 if (responseJSON.location == true) {
                     let myPos = { lat: itemLat, lng: itemLon };
@@ -86,7 +95,7 @@ $(document).ready(function () {
         }).done(function () {
             loader.hide();
             mapDiv.show();
-            answer_zone.show();
+            answer.show();
         })
     })
 })

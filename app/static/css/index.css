@@ -22,7 +22,8 @@ h1 {
 	align-items:center;
     width:90%;
     margin:auto;
-
+	padding: 0 0 80px 0;
+	max-height:90%;
 }
 
 form {
@@ -100,11 +101,12 @@ footer > div{
 	overflow:auto;
 }
 
-#answer{
+.answer{
 	display:none;
 	width:45%;
 	min-width: 150px;
 	font-size: 0.8em;
+	margin: 5% 0;
 }
 
 .userMessage{
@@ -125,11 +127,12 @@ footer > div{
 	overflow:auto;
 }
 
-#map{
-	display:none;
+.map{
+	/* display:none; */
 	height:300px;
 	width:45%;
 	min-width:400px;
+	margin: 5% 0;
 	
 }
 
