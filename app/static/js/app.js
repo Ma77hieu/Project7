@@ -94,8 +94,8 @@ $(document).ready(function () {
             }
         }).done(function () {
             loader.hide();
-            mapDiv.show();
-            answer.show();
+            // mapDiv.show();
+            // answer.show();
         })
     })
 })
