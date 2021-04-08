@@ -5,7 +5,7 @@ $(document).ready(function () {
 
 
 
-
+    /** Escape specific character to avoid xss injections */
     function escape(inputString) {
         var toReplace = {
             '&': '&amp;',
@@ -19,7 +19,7 @@ $(document).ready(function () {
     };
 
 
-
+    /** Generates the map thanks to google maps api */
     function initMap(myPos) {
         const lastmap = document.getElementsByClassName("map")[0];
         map = new google.maps.Map(lastmap, {
@@ -33,21 +33,13 @@ $(document).ready(function () {
     }
 
     $('form').on('submit', function (e) {
-        // const lastMessagesApi = $('.apiResponse')[0]
-        // const lastMessagesUser = $('.userMessage')[0]
-        // lastMessagesApi.remove()
-        // lastMessagesUser.remove()
-        // mapDiv.empty()
         const answerZone = $('#answerZone');
         answerZone.prepend("<div class='map'></div><div class='answer'></div>");
-        // const row = answerZone.insertBefore(newRow, null);
         const loader = $('#loader');
-
-
         e.preventDefault();
         let questionNoXss = escape($('#userInput').val())
         loader.show();
-
+        /** ajax call to send the user input and receive the bot answer*/
         $.ajax({
             url: 'parser',
             type: "POST",
@@ -94,8 +86,6 @@ $(document).ready(function () {
             }
         }).done(function () {
             loader.hide();
-            // mapDiv.show();
-            // answer.show();
         })
     })
 })
